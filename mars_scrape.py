@@ -84,20 +84,22 @@ def scrape():
         browser.back() 
 
     #store the scraped info into a dictionary
-    mars_data = {
-        "JPL_featured_img": featured_image_url,
+    mars_variables = {
+        "News_title": news_title,
+        "News_paragraph": news_p,
+        "JPL_featured_img": featured_img_url,
         "mars_weather": mars_weather,
         "mars_facts": html_table,
-        "Cerberus": Cerberus,
-        "Schiaparelli": Schiaparelli,
-        "Syrtis": Syrtis,
-        "Valles": Valles
+        "Cerberus": hemisphere_img_urls[0],
+        "Schiaparelli": hemisphere_img_urls[1],
+        "Syrtis_Major": hemisphere_img_urls[2],
+        "Valles_Marineris": hemisphere_img_urls[3]
         }
 
     #close the browser
     browser.quit()
 
-    return mars_data
+    return mars_variables
 
 if__name__=='__main__':
     scrape()
