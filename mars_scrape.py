@@ -41,13 +41,6 @@ def scrape():
     image = image_soup.find('li', class_ = 'slide')
     featured_img_url = "https://www.jpl.nasa.gov" + image.a['data-fancybox-href']
 
-    #Scraping Twitter
-    twitter_url = "https://twitter.com/marswxreport?lang=en"
-    browser.visit(twitter_url)
-
-    #Scrape the lastest weather report
-    mars_weather = soup.find(class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
-
     #Make it pause
     time.sleep(1)
 
@@ -83,17 +76,18 @@ def scrape():
         hemisphere_img_urls.append({'title':name, "img_url": url})
         browser.back() 
 
+    time.sleep(1)
+
     #store the scraped info into a dictionary
     mars_variables = {
         "News_title": news_title,
         "News_paragraph": news_p,
         "JPL_featured_img": featured_img_url,
-        "mars_weather": mars_weather,
         "mars_facts": html_table,
-        "Cerberus": hemisphere_img_urls[0],
-        "Schiaparelli": hemisphere_img_urls[1],
-        "Syrtis_Major": hemisphere_img_urls[2],
-        "Valles_Marineris": hemisphere_img_urls[3]
+        "Cerberus": hemisphere_img_urls[0]["img_url"],
+        "Schiaparelli": hemisphere_img_urls[1]["img_url"],
+        "Syrtis_Major": hemisphere_img_urls[2]["img_url"],
+        "Valles_Marineris": hemisphere_img_urls[3]["img_url"]
         }
 
     #close the browser
@@ -101,5 +95,5 @@ def scrape():
 
     return mars_variables
 
-if__name__=='__main__':
+if __name__ == "__main__":
     scrape()
